@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbfaf3">
+  <meta name="description" content="2026년 11월 28일 토요일 오후 1시 30분, 오월식당에서 현서의 첫 생일을 함께 축하해 주세요.">
+  <meta property="og:title" content="현서의 첫 생일에 초대합니다">
+  <meta property="og:description" content="11월 28일 토요일 오후 1시 30분 · 오월식당 1층">
+  <title>현서의 첫 생일에 초대합니다</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div class="corner corner-left" aria-hidden="true"></div><div class="corner corner-right" aria-hidden="true"></div>
+    <p class="date">2026.11.28</p>
+    <h1>현서의 첫 생일에<br>초대드립니다</h1>
+    <div class="portrait"><div class="wreath" aria-hidden="true"></div><div class="main-photo photo-placeholder"><span>현서의 첫 번째 생일</span><img src="images/main.jpg" alt="현서의 대표 사진" onerror="this.hidden=true" onload="this.parentElement.classList.remove('photo-placeholder')"></div></div>
+    <p class="event-summary">토요일 오후 1시 30분<br>오월식당 1층</p>
+    <p class="age">오늘은 현서가 태어난 지 <strong id="age">—</strong>일째 되는 날이에요</p>
+  </header>
+  <section class="greeting">
+    <div class="divider" aria-hidden="true"></div><h2>인사드립니다</h2>
+    <p>작은 손으로 세상을 만나던 현서가<br>어느덧 첫 번째 생일을 맞았습니다.</p>
+    <p>지난 일 년 동안 보내 주신 사랑에 감사드리며<br>가까운 분들을 모시고 작은 자리를 마련했습니다.</p>
+    <p>오셔서 현서의 첫 생일을 함께 축하해 주세요.</p>
+    <p class="family"><b>노정원</b> · <b>김송이</b>의 딸 <b>노현서</b></p>
+  </section>
+  <section>
+    <div class="divider" aria-hidden="true"></div><h2>날짜와 시간</h2>
+    <h3>11월 28일 토요일</h3><p class="muted">오후 1시 30분</p>
+    <div class="calendar"><p class="calendar-title">2026년 11월</p><div id="calendar-grid" class="calendar-grid" aria-label="2026년 11월 달력"></div><p class="legend"><i></i> 돌잔치 · 첫 생일</p></div>
+    <p class="countdown"><strong id="dday">—</strong><span id="dday-copy"></span></p>
+    <div class="button-pair"><a id="google-calendar" target="_blank" rel="noopener">구글 캘린더에 추가</a><button id="apple-calendar">아이폰 캘린더에 추가</button></div>
+  </section>
+  <section>
+    <div class="divider" aria-hidden="true"></div><h2>오시는 길</h2><h3>오월식당</h3><p class="muted">1층</p>
+    <p class="address">경기도 용인시 수지구 동천동 동천로 409<br><button class="text-button" id="copy-address">주소 복사</button></p>
+    <div class="button-pair"><a href="https://map.kakao.com/link/search/오월식당%20동천로%20409" target="_blank" rel="noopener">카카오맵</a><a href="https://map.naver.com/p/search/오월식당%20동천로%20409" target="_blank" rel="noopener">네이버 지도</a></div>
+  </section>
+  <section>
+    <div class="divider" aria-hidden="true"></div><h2>현서의 열두 달</h2><p class="muted gallery-intro">태어나서 첫 돌까지, 한 달에 한 장씩 모았어요.</p><div id="gallery" class="gallery"></div>
+  </section>
+  <section>
+    <div class="divider" aria-hidden="true"></div><h2>연락하기</h2>
+    <div class="contact"><span class="role">아빠</span><div><b>노정원</b><a class="number" href="tel:01092879264">010-9287-9264</a></div><a class="small-button" href="tel:01092879264">전화</a><a class="small-button" href="sms:01092879264">문자</a></div>
+    <div class="contact"><span class="role">엄마</span><div><b>김송이</b><a class="number" href="tel:01030243455">010-3024-3455</a></div><a class="small-button" href="tel:01030243455">전화</a><a class="small-button" href="sms:01030243455">문자</a></div>
+  </section>
+  <footer><button class="share" id="share">초대장 공유하기</button><p>현서 아빠 노정원 · 엄마 김송이 드림</p></footer>
+</main>
+<p id="toast" role="status" aria-live="polite"></p>
+<dialog id="photo-dialog"><button id="close-photo" aria-label="사진 닫기">닫기</button><img id="large-photo" alt=""><p id="photo-caption"></p></dialog>
+</body></html>

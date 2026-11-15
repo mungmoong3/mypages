@@ -4,4 +4,4 @@
 /* 가독성을 위한 텍스트 대비 보정 */
 :root{--muted:#6f6e63;--green:#596d40}.date{color:#6f6e63}.calendar-grid .selected{color:#583f3a}
 
-.main-photo img{object-position:50% 70%}.music-player{margin:22px 0 0}.music-player button{min-height:44px;border:1px solid var(--leaf);border-radius:24px;background:transparent;color:var(--green);padding:7px 24px;font-size:14px}.music-player button[aria-pressed=true]{background:var(--green);color:white}.music-player button:disabled{opacity:.6;cursor:wait}.music-player p{font-size:12px;color:var(--muted);margin-top:5px}
+.main-photo img{object-position:50% 70%}

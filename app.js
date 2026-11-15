@@ -31,20 +31,15 @@ $('#share').onclick=async()=>{const data={title:'현서의 첫 생일에 초대�
 const calendarParams=new URLSearchParams({action:'TEMPLATE',text:'현서의 첫 생일',dates:'20261128T133000/20261128T133000',ctz:'Asia/Seoul',location:`오월식당 1층, ${address}`,details:'현서의 첫 생일을 함께 축하해 주세요.\n'+location.href});
 $('#google-calendar').href='https://calendar.google.com/calendar/render?'+calendarParams;
 const music = $('#background-music');
-const musicToggle = $('#music-toggle');
 music.volume = 0.35;
-function updateMusicButton() {
-  musicToggle.textContent = music.paused ? '배경음 듣기' : '배경음 끄기';
-  musicToggle.setAttribute('aria-pressed', String(!music.paused));
+async function startMusic() {
+  try {
+    await music.play();
+    document.removeEventListener('pointerdown', startMusic);
+    document.removeEventListener('keydown', startMusic);
+  } catch { /* 자동 재생이 차단되면 다음 사용자 입력에서 다시 시도합니다. */ }
 }
-music.addEventListener('play', updateMusicButton);
-music.addEventListener('pause', updateMusicButton);
-music.addEventListener('error', () => { updateMusicButton(); toast('음악을 불러오지 못했어요. 잠시 후 다시 눌러 주세요.'); });
-musicToggle.onclick = async () => {
-  if (!music.paused) { music.pause(); return; }
-  musicToggle.disabled = true;
-  try { await music.play(); }
-  catch { toast('음악을 재생하지 못했어요. 다시 눌러 주세요.'); }
-  finally { musicToggle.disabled = false; updateMusicButton(); }
-};
+document.addEventListener('pointerdown', startMusic, {passive:true});
+document.addEventListener('keydown', startMusic);
+startMusic();
 $('#apple-calendar').onclick=()=>{const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Hyunseo//First Birthday//KO','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:hyunseo-20261128@mungmoong3.github.io',`DTSTAMP:${stamp}`,'DTSTART:20261128T043000Z','SUMMARY:현서의 첫 생일',`LOCATION:오월식당 1층\\, ${address}`,'DESCRIPTION:현서의 첫 생일을 함께 축하해 주세요.','END:VEVENT','END:VCALENDAR',''].join('\r\n');const url=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='현서-첫생일.ics';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);};

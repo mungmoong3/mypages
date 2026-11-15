@@ -20,9 +20,45 @@ $('.wreath').innerHTML=wreath+'</svg>';
 let branch='<svg viewBox="0 0 100 180" xmlns="http://www.w3.org/2000/svg"><path d="M10 180 Q40 80 85 0" stroke="#b0be96" stroke-width="2" fill="none"/>';
 for(let i=0;i<8;i++)branch+=leaf(23+i*7,155-i*21,i%2?15:-65,i%2?'#c6d1af':'#a5b68a');
 document.querySelectorAll('.corner').forEach(el=>el.innerHTML=branch+'</svg>');
-for(let month=1;month<=12;month++){const button=document.createElement('button');button.className='gallery-item';button.setAttribute('aria-label',`${month}개월 사진`);button.disabled=true;const img=document.createElement('img');img.alt=`현서 ${month}개월`;img.loading='lazy';img.onload=()=>{button.classList.add('has-photo');button.disabled=false;};img.onerror=()=>img.remove();img.src=`images/${String(month).padStart(2,'0')}.jpg`;const label=document.createElement('span');label.textContent=`${month}개월`;button.append(img,label);button.onclick=()=>{$('#large-photo').src=img.src;$('#large-photo').alt=img.alt;$('#photo-caption').textContent=img.alt;$('#photo-dialog').showModal();};$('#gallery').append(button);}
-$('#close-photo').onclick=()=>$('#photo-dialog').close();
-$('#photo-dialog').addEventListener('click',e=>{if(e.target===$('#photo-dialog'))$('#photo-dialog').close();});
+for(let month=1;month<=12;month++){const button=document.createElement('button');button.className='gallery-item';button.setAttribute('aria-label',`${month}개월 사진`);button.disabled=true;const img=document.createElement('img');img.alt=`현서 ${month}개월`;img.loading='lazy';img.onload=()=>{button.classList.add('has-photo');button.disabled=false;};img.onerror=()=>img.remove();img.src=`images/${String(month).padStart(2,'0')}.jpg`;const label=document.createElement('span');label.textContent=`${month}개월`;button.append(img,label);button.onclick=()=>openPhoto(month-1);$('#gallery').append(button);}
+const photoDialog = $('#photo-dialog');
+let photoIndex = 0;
+function showPhoto(index) {
+  photoIndex = (index + 12) % 12;
+  const month = photoIndex + 1;
+  $('#large-photo').src = `images/${String(month).padStart(2,'0')}.jpg`;
+  $('#large-photo').alt = `현서 ${month}개월`;
+  $('#photo-caption').textContent = `${month}개월 · ${month} / 12`;
+}
+function openPhoto(index) {
+  showPhoto(index);
+  photoDialog.showModal();
+}
+$('#previous-photo').onclick = () => showPhoto(photoIndex - 1);
+$('#next-photo').onclick = () => showPhoto(photoIndex + 1);
+$('#close-photo').onclick = () => photoDialog.close();
+photoDialog.addEventListener('click', e => { if (e.target === photoDialog) photoDialog.close(); });
+photoDialog.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+    e.preventDefault();
+    showPhoto(photoIndex + (e.key === 'ArrowRight' ? 1 : -1));
+  }
+});
+let swipeStart = null;
+const largePhoto = $('#large-photo');
+largePhoto.addEventListener('touchstart', e => {
+  swipeStart = e.touches.length === 1 ? {x:e.touches[0].clientX, y:e.touches[0].clientY} : null;
+}, {passive:true});
+largePhoto.addEventListener('touchmove', e => { if (e.touches.length !== 1) swipeStart = null; }, {passive:true});
+largePhoto.addEventListener('touchcancel', () => { swipeStart = null; }, {passive:true});
+largePhoto.addEventListener('touchend', e => {
+  if (!swipeStart || e.touches.length || !e.changedTouches.length) { swipeStart = null; return; }
+  const dx = e.changedTouches[0].clientX - swipeStart.x;
+  const dy = e.changedTouches[0].clientY - swipeStart.y;
+  swipeStart = null;
+  if (Math.abs(dx) >= 45 && Math.abs(dx) > Math.abs(dy) * 1.3) showPhoto(photoIndex + (dx < 0 ? 1 : -1));
+}, {passive:true});
+photoDialog.addEventListener('close', () => { swipeStart = null; });
 let toastTimer;
 function toast(message){$('#toast').textContent=message;$('#toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('visible'),2800);}
 async function copy(text,message){try{await navigator.clipboard.writeText(text);toast(message);}catch{window.prompt('아래 내용을 복사해 주세요.',text);}}

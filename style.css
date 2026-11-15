@@ -5,3 +5,6 @@
 :root{--muted:#6f6e63;--green:#596d40}.date{color:#6f6e63}.calendar-grid .selected{color:#583f3a}
 
 .main-photo img{object-position:50% 70%}
+
+.photo-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}.photo-navigation button{border:1px solid var(--leaf);border-radius:24px;background:transparent;color:var(--green);min-width:60px;min-height:44px;padding:6px 14px}.photo-navigation p{font-family:'Gowun Batang',serif;font-size:15px}#large-photo{display:block;touch-action:pan-y pinch-zoom;user-select:none;-webkit-user-select:none;height:65vh;height:65dvh;object-fit:contain}#photo-dialog{max-height:95vh;max-height:95dvh}
+

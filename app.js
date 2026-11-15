@@ -1,7 +1,7 @@
 const eventDate = '2026-11-28';
 // 예시의 2026-11-14 기준 352일째에 맞춘 생년월일입니다. 실제 생일이 다르면 수정하세요.
 const birthDate = '2025-11-28';
-const address = '경기도 용인시 수지구 동천동 동천로 409';
+const address = '경기도 용인시 수지구 동천동 동천로 411';
 const $ = selector => document.querySelector(selector);
 const today = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const dayNumber = value => Date.parse(value + 'T00:00:00Z') / 86400000;

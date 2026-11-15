@@ -7,6 +7,7 @@
   <meta name="description" content="2026년 11월 28일 토요일 오후 1시 30분, 오월식당에서 현서의 첫 생일을 함께 축하해 주세요.">
   <meta property="og:title" content="현서의 첫 생일에 초대합니다">
   <meta property="og:description" content="11월 28일 토요일 오후 1시 30분 · 오월식당 1층">
+  <meta property="og:image" content="https://mungmoong3.github.io/mypages/images/main.jpg">
   <title>현서의 첫 생일에 초대합니다</title>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
@@ -19,6 +20,8 @@
     <h1>현서의 첫 생일에<br>초대드립니다</h1>
     <div class="portrait"><div class="wreath" aria-hidden="true"></div><div class="main-photo photo-placeholder"><span>현서의 첫 번째 생일</span><img src="images/main.jpg" alt="현서의 대표 사진" onerror="this.hidden=true" onload="this.parentElement.classList.remove('photo-placeholder')"></div></div>
     <p class="event-summary">토요일 오후 1시 30분<br>오월식당 1층</p>
+    <div class="music-player"><button id="music-toggle" type="button" aria-pressed="false" aria-controls="background-music">배경음 듣기</button><p>음악과 함께 초대장을 감상해 보세요</p></div>
+    <audio id="background-music" src="audio/background.mp3" preload="none" loop></audio>
     <p class="age">오늘은 현서가 태어난 지 <strong id="age">—</strong>일째 되는 날이에요</p>
   </header>
   <section class="greeting">

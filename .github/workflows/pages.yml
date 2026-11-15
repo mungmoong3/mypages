@@ -26,6 +26,7 @@ jobs:
           mkdir public
           cp index.html style.css app.js .nojekyll public/
           cp -r images public/
+          cp -r audio public/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public
